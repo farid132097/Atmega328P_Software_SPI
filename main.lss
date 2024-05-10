@@ -1,0 +1,719 @@
+
+main.elf:     file format elf32-avr
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .text         000002ea  00000000  00000000  00000074  2**1
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  1 .bss          00000045  00800100  00800100  0000035e  2**0
+                  ALLOC
+  2 .debug_aranges 00000040  00000000  00000000  0000035e  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  3 .debug_pubnames 000001c7  00000000  00000000  0000039e  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  4 .debug_info   00000890  00000000  00000000  00000565  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  5 .debug_abbrev 000002f4  00000000  00000000  00000df5  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  6 .debug_line   000005bd  00000000  00000000  000010e9  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  7 .debug_frame  00000180  00000000  00000000  000016a8  2**2
+                  CONTENTS, READONLY, DEBUGGING
+  8 .debug_str    0000027c  00000000  00000000  00001828  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  9 .debug_loc    0000014d  00000000  00000000  00001aa4  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 10 .debug_ranges 000000a8  00000000  00000000  00001bf1  2**0
+                  CONTENTS, READONLY, DEBUGGING
+
+Disassembly of section .text:
+
+00000000 <__vectors>:
+   0:	0c 94 34 00 	jmp	0x68	; 0x68 <__ctors_end>
+   4:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+   8:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+   c:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  10:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  14:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  18:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  1c:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  20:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  24:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  28:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  2c:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  30:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  34:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  38:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  3c:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  40:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  44:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  48:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  4c:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  50:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  54:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  58:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  5c:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  60:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  64:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+
+00000068 <__ctors_end>:
+  68:	11 24       	eor	r1, r1
+  6a:	1f be       	out	0x3f, r1	; 63
+  6c:	cf ef       	ldi	r28, 0xFF	; 255
+  6e:	d8 e0       	ldi	r29, 0x08	; 8
+  70:	de bf       	out	0x3e, r29	; 62
+  72:	cd bf       	out	0x3d, r28	; 61
+
+00000074 <__do_clear_bss>:
+  74:	11 e0       	ldi	r17, 0x01	; 1
+  76:	a0 e0       	ldi	r26, 0x00	; 0
+  78:	b1 e0       	ldi	r27, 0x01	; 1
+  7a:	01 c0       	rjmp	.+2      	; 0x7e <.do_clear_bss_start>
+
+0000007c <.do_clear_bss_loop>:
+  7c:	1d 92       	st	X+, r1
+
+0000007e <.do_clear_bss_start>:
+  7e:	a5 34       	cpi	r26, 0x45	; 69
+  80:	b1 07       	cpc	r27, r17
+  82:	e1 f7       	brne	.-8      	; 0x7c <.do_clear_bss_loop>
+  84:	0e 94 48 00 	call	0x90	; 0x90 <main>
+  88:	0c 94 73 01 	jmp	0x2e6	; 0x2e6 <_exit>
+
+0000008c <__bad_interrupt>:
+  8c:	0c 94 00 00 	jmp	0	; 0x0 <__vectors>
+
+00000090 <main>:
+#include <avr/io.h>
+#include <avr/interrupt.h>
+#include <util/delay.h>
+#include "spi.h"
+
+int main(void){
+  90:	cf 93       	push	r28
+  92:	df 93       	push	r29
+  
+  SPI_Init();
+  94:	0e 94 70 01 	call	0x2e0	; 0x2e0 <SPI_Init>
+    milliseconds can be achieved.
+ */
+void
+_delay_loop_2(uint16_t __count)
+{
+	__asm__ volatile (
+  98:	cc e2       	ldi	r28, 0x2C	; 44
+  9a:	d1 e0       	ldi	r29, 0x01	; 1
+  
+while(1){
+        
+		SPI_Data_Flush();
+  9c:	0e 94 ca 00 	call	0x194	; 0x194 <SPI_Data_Flush>
+		SPI_Data_Add(0x55);
+  a0:	85 e5       	ldi	r24, 0x55	; 85
+  a2:	0e 94 d6 00 	call	0x1ac	; 0x1ac <SPI_Data_Add>
+		SPI_Data_Add(0x66);
+  a6:	86 e6       	ldi	r24, 0x66	; 102
+  a8:	0e 94 d6 00 	call	0x1ac	; 0x1ac <SPI_Data_Add>
+		SPI_Data_Add(0x77);
+  ac:	87 e7       	ldi	r24, 0x77	; 119
+  ae:	0e 94 d6 00 	call	0x1ac	; 0x1ac <SPI_Data_Add>
+		
+        SPI_Data_Transceive();
+  b2:	0e 94 11 01 	call	0x222	; 0x222 <SPI_Data_Transceive>
+  b6:	88 e8       	ldi	r24, 0x88	; 136
+  b8:	93 e1       	ldi	r25, 0x13	; 19
+  ba:	fe 01       	movw	r30, r28
+  bc:	31 97       	sbiw	r30, 0x01	; 1
+  be:	f1 f7       	brne	.-4      	; 0xbc <main+0x2c>
+		__ticks = (uint16_t) (__ms * 10.0);
+		while(__ticks)
+		{
+			// wait 1/10 ms
+			_delay_loop_2(((F_CPU) / 4e3) / 10);
+			__ticks --;
+  c0:	01 97       	sbiw	r24, 0x01	; 1
+		__ticks = 1;
+	else if (__tmp > 65535)
+	{
+		//	__ticks = requested delay in 1/10 ms
+		__ticks = (uint16_t) (__ms * 10.0);
+		while(__ticks)
+  c2:	d9 f7       	brne	.-10     	; 0xba <main+0x2a>
+  c4:	eb cf       	rjmp	.-42     	; 0x9c <main+0xc>
+
+000000c6 <SPI_Flush_Tx_Buf>:
+void SPI_Struct_Init(void){
+  SPI_Flush_Tx_Buf();
+  SPI_Flush_Rx_Buf();
+}
+
+void SPI_Flush_Tx_Buf(void){
+  c6:	e0 e0       	ldi	r30, 0x00	; 0
+  c8:	f1 e0       	ldi	r31, 0x01	; 1
+  for(uint16_t i=0;i<SPI_BUF_SIZE;i++){
+    SPI.TxBuf[i]=0;
+  ca:	11 92       	st	Z+, r1
+  SPI_Flush_Tx_Buf();
+  SPI_Flush_Rx_Buf();
+}
+
+void SPI_Flush_Tx_Buf(void){
+  for(uint16_t i=0;i<SPI_BUF_SIZE;i++){
+  cc:	81 e0       	ldi	r24, 0x01	; 1
+  ce:	e0 32       	cpi	r30, 0x20	; 32
+  d0:	f8 07       	cpc	r31, r24
+  d2:	d9 f7       	brne	.-10     	; 0xca <SPI_Flush_Tx_Buf+0x4>
+    SPI.TxBuf[i]=0;
+  }
+  SPI.TxIndex=0;
+  d4:	12 a2       	std	Z+34, r1	; 0x22
+  d6:	11 a2       	std	Z+33, r1	; 0x21
+}
+  d8:	08 95       	ret
+
+000000da <SPI_Flush_Rx_Buf>:
+
+void SPI_Flush_Rx_Buf(void){
+  da:	e0 e2       	ldi	r30, 0x20	; 32
+  dc:	f1 e0       	ldi	r31, 0x01	; 1
+  for(uint16_t i=0;i<SPI_BUF_SIZE;i++){
+    SPI.RxBuf[i]=0;
+  de:	11 92       	st	Z+, r1
+  }
+  SPI.TxIndex=0;
+}
+
+void SPI_Flush_Rx_Buf(void){
+  for(uint16_t i=0;i<SPI_BUF_SIZE;i++){
+  e0:	81 e0       	ldi	r24, 0x01	; 1
+  e2:	e0 34       	cpi	r30, 0x40	; 64
+  e4:	f8 07       	cpc	r31, r24
+  e6:	d9 f7       	brne	.-10     	; 0xde <SPI_Flush_Rx_Buf+0x4>
+    SPI.RxBuf[i]=0;
+  }
+  SPI.RxIndex=0;
+  e8:	14 82       	std	Z+4, r1	; 0x04
+  ea:	13 82       	std	Z+3, r1	; 0x03
+  SPI.RxLast=0;
+  ec:	10 82       	st	Z, r1
+}
+  ee:	08 95       	ret
+
+000000f0 <SPI_Struct_Init>:
+  uint16_t RxIndex;
+}spi_t;
+
+spi_t SPI;
+
+void SPI_Struct_Init(void){
+  f0:	e0 e0       	ldi	r30, 0x00	; 0
+  f2:	f1 e0       	ldi	r31, 0x01	; 1
+  SPI_Flush_Rx_Buf();
+}
+
+void SPI_Flush_Tx_Buf(void){
+  for(uint16_t i=0;i<SPI_BUF_SIZE;i++){
+    SPI.TxBuf[i]=0;
+  f4:	11 92       	st	Z+, r1
+  SPI_Flush_Tx_Buf();
+  SPI_Flush_Rx_Buf();
+}
+
+void SPI_Flush_Tx_Buf(void){
+  for(uint16_t i=0;i<SPI_BUF_SIZE;i++){
+  f6:	81 e0       	ldi	r24, 0x01	; 1
+  f8:	e0 32       	cpi	r30, 0x20	; 32
+  fa:	f8 07       	cpc	r31, r24
+  fc:	d9 f7       	brne	.-10     	; 0xf4 <SPI_Struct_Init+0x4>
+    SPI.TxBuf[i]=0;
+  }
+  SPI.TxIndex=0;
+  fe:	12 a2       	std	Z+34, r1	; 0x22
+ 100:	11 a2       	std	Z+33, r1	; 0x21
+
+spi_t SPI;
+
+void SPI_Struct_Init(void){
+  SPI_Flush_Tx_Buf();
+  SPI_Flush_Rx_Buf();
+ 102:	0e 94 6d 00 	call	0xda	; 0xda <SPI_Flush_Rx_Buf>
+}
+ 106:	08 95       	ret
+
+00000108 <SPI_GPIO_Init>:
+  SPI.RxIndex=0;
+  SPI.RxLast=0;
+}
+
+void SPI_GPIO_Init(void){
+  SPI_SCK_DDR  |= (1<<SPI_SCK_bp);
+ 108:	20 9a       	sbi	0x04, 0	; 4
+  SPI_MISO_DDR &=~(1<<SPI_MISO_bp);
+ 10a:	54 98       	cbi	0x0a, 4	; 10
+  SPI_MOSI_DDR |= (1<<SPI_MOSI_bp);
+ 10c:	38 9a       	sbi	0x07, 0	; 7
+  SPI_CSN_DDR  |= (1<<SPI_CSN_bp);
+ 10e:	57 9a       	sbi	0x0a, 7	; 10
+  
+  SPI_SCK_PORT &=~(1<<SPI_SCK_bp);
+ 110:	28 98       	cbi	0x05, 0	; 5
+  SPI_MISO_PORT|= (1<<SPI_MISO_bp);
+ 112:	5c 9a       	sbi	0x0b, 4	; 11
+  SPI_MOSI_PORT&=~(1<<SPI_MOSI_bp);
+ 114:	40 98       	cbi	0x08, 0	; 8
+  SPI_CSN_PORT |= (1<<SPI_CSN_bp);
+ 116:	5f 9a       	sbi	0x0b, 7	; 11
+}
+ 118:	08 95       	ret
+
+0000011a <SPI_Bit_Delay>:
+    can be achieved.
+*/
+void
+_delay_loop_1(uint8_t __count)
+{
+	__asm__ volatile (
+ 11a:	84 e1       	ldi	r24, 0x14	; 20
+ 11c:	8a 95       	dec	r24
+ 11e:	f1 f7       	brne	.-4      	; 0x11c <SPI_Bit_Delay+0x2>
+
+void SPI_Bit_Delay(void){
+  _delay_us(SPI_BIT_DELAY);
+}
+ 120:	08 95       	ret
+
+00000122 <SPI_Set_SCK>:
+
+void SPI_Set_SCK(uint8_t state){
+  if(state==1){
+ 122:	81 30       	cpi	r24, 0x01	; 1
+ 124:	11 f4       	brne	.+4      	; 0x12a <SPI_Set_SCK+0x8>
+    SPI_SCK_PORT |= (1<<SPI_SCK_bp);
+ 126:	28 9a       	sbi	0x05, 0	; 5
+ 128:	08 95       	ret
+  }else{
+    SPI_SCK_PORT &=~(1<<SPI_SCK_bp);
+ 12a:	28 98       	cbi	0x05, 0	; 5
+ 12c:	08 95       	ret
+
+0000012e <SPI_Get_MISO>:
+  }
+}
+
+uint8_t SPI_Get_MISO(void){
+  if(SPI_MISO_PIN & (1<<SPI_MISO_bp)){
+ 12e:	89 b1       	in	r24, 0x09	; 9
+ 130:	90 e0       	ldi	r25, 0x00	; 0
+ 132:	24 e0       	ldi	r18, 0x04	; 4
+ 134:	96 95       	lsr	r25
+ 136:	87 95       	ror	r24
+ 138:	2a 95       	dec	r18
+ 13a:	e1 f7       	brne	.-8      	; 0x134 <SPI_Get_MISO+0x6>
+    return 1;
+  }else{
+    return 0;
+  }
+}
+ 13c:	81 70       	andi	r24, 0x01	; 1
+ 13e:	08 95       	ret
+
+00000140 <SPI_Set_MOSI>:
+
+void SPI_Set_MOSI(uint8_t state){
+  if(state==1){
+ 140:	81 30       	cpi	r24, 0x01	; 1
+ 142:	11 f4       	brne	.+4      	; 0x148 <SPI_Set_MOSI+0x8>
+    SPI_MOSI_PORT |= (1<<SPI_MOSI_bp);
+ 144:	40 9a       	sbi	0x08, 0	; 8
+ 146:	08 95       	ret
+  }else{
+    SPI_MOSI_PORT &=~(1<<SPI_MOSI_bp);
+ 148:	40 98       	cbi	0x08, 0	; 8
+ 14a:	08 95       	ret
+
+0000014c <SPI_Set_CSN>:
+  }
+}
+
+void SPI_Set_CSN(uint8_t state){
+  if(state==1){
+ 14c:	81 30       	cpi	r24, 0x01	; 1
+ 14e:	11 f4       	brne	.+4      	; 0x154 <SPI_Set_CSN+0x8>
+    SPI_CSN_PORT  |= (1<<SPI_CSN_bp);
+ 150:	5f 9a       	sbi	0x0b, 7	; 11
+ 152:	08 95       	ret
+  }else{
+    SPI_CSN_PORT  &=~(1<<SPI_CSN_bp);
+ 154:	5f 98       	cbi	0x0b, 7	; 11
+ 156:	08 95       	ret
+
+00000158 <SPI_Transceive>:
+ 158:	94 e1       	ldi	r25, 0x14	; 20
+ 15a:	9a 95       	dec	r25
+ 15c:	f1 f7       	brne	.-4      	; 0x15a <SPI_Transceive+0x2>
+ 15e:	20 e0       	ldi	r18, 0x00	; 0
+  uint8_t rx_data=0;
+  SPI_Bit_Delay();
+  
+  #ifdef SPI_DATA_MSB_FIRST
+  for(uint8_t i=0;i<8;i++){
+    if(data & 0x80){
+ 160:	34 e1       	ldi	r19, 0x14	; 20
+ 162:	87 ff       	sbrs	r24, 7
+ 164:	02 c0       	rjmp	.+4      	; 0x16a <SPI_Transceive+0x12>
+  }
+}
+
+void SPI_Set_MOSI(uint8_t state){
+  if(state==1){
+    SPI_MOSI_PORT |= (1<<SPI_MOSI_bp);
+ 166:	40 9a       	sbi	0x08, 0	; 8
+ 168:	01 c0       	rjmp	.+2      	; 0x16c <SPI_Transceive+0x14>
+  }else{
+    SPI_MOSI_PORT &=~(1<<SPI_MOSI_bp);
+ 16a:	40 98       	cbi	0x08, 0	; 8
+ 16c:	93 2f       	mov	r25, r19
+ 16e:	9a 95       	dec	r25
+ 170:	f1 f7       	brne	.-4      	; 0x16e <SPI_Transceive+0x16>
+  _delay_us(SPI_BIT_DELAY);
+}
+
+void SPI_Set_SCK(uint8_t state){
+  if(state==1){
+    SPI_SCK_PORT |= (1<<SPI_SCK_bp);
+ 172:	28 9a       	sbi	0x05, 0	; 5
+    SPI_SCK_PORT &=~(1<<SPI_SCK_bp);
+  }
+}
+
+uint8_t SPI_Get_MISO(void){
+  if(SPI_MISO_PIN & (1<<SPI_MISO_bp)){
+ 174:	99 b1       	in	r25, 0x09	; 9
+ 176:	93 2f       	mov	r25, r19
+ 178:	9a 95       	dec	r25
+ 17a:	f1 f7       	brne	.-4      	; 0x178 <SPI_Transceive+0x20>
+
+void SPI_Set_SCK(uint8_t state){
+  if(state==1){
+    SPI_SCK_PORT |= (1<<SPI_SCK_bp);
+  }else{
+    SPI_SCK_PORT &=~(1<<SPI_SCK_bp);
+ 17c:	28 98       	cbi	0x05, 0	; 5
+ 17e:	93 2f       	mov	r25, r19
+ 180:	9a 95       	dec	r25
+ 182:	f1 f7       	brne	.-4      	; 0x180 <SPI_Transceive+0x28>
+uint8_t SPI_Transceive(uint8_t data){
+  uint8_t rx_data=0;
+  SPI_Bit_Delay();
+  
+  #ifdef SPI_DATA_MSB_FIRST
+  for(uint8_t i=0;i<8;i++){
+ 184:	2f 5f       	subi	r18, 0xFF	; 255
+ 186:	28 30       	cpi	r18, 0x08	; 8
+ 188:	11 f0       	breq	.+4      	; 0x18e <SPI_Transceive+0x36>
+    if(data & 0x80){
+	  SPI_Set_MOSI(1);
+	}else{
+	  SPI_Set_MOSI(0);
+	}
+	data<<=1;
+ 18a:	88 0f       	add	r24, r24
+ 18c:	ea cf       	rjmp	.-44     	; 0x162 <SPI_Transceive+0xa>
+
+void SPI_Set_MOSI(uint8_t state){
+  if(state==1){
+    SPI_MOSI_PORT |= (1<<SPI_MOSI_bp);
+  }else{
+    SPI_MOSI_PORT &=~(1<<SPI_MOSI_bp);
+ 18e:	40 98       	cbi	0x08, 0	; 8
+  }
+  #endif
+  
+  SPI_Set_MOSI(0);
+  return 0;
+}
+ 190:	80 e0       	ldi	r24, 0x00	; 0
+ 192:	08 95       	ret
+
+00000194 <SPI_Data_Flush>:
+
+
+void SPI_Data_Flush(void){
+ 194:	e0 e0       	ldi	r30, 0x00	; 0
+ 196:	f1 e0       	ldi	r31, 0x01	; 1
+  SPI_Flush_Rx_Buf();
+}
+
+void SPI_Flush_Tx_Buf(void){
+  for(uint16_t i=0;i<SPI_BUF_SIZE;i++){
+    SPI.TxBuf[i]=0;
+ 198:	11 92       	st	Z+, r1
+  SPI_Flush_Tx_Buf();
+  SPI_Flush_Rx_Buf();
+}
+
+void SPI_Flush_Tx_Buf(void){
+  for(uint16_t i=0;i<SPI_BUF_SIZE;i++){
+ 19a:	81 e0       	ldi	r24, 0x01	; 1
+ 19c:	e0 32       	cpi	r30, 0x20	; 32
+ 19e:	f8 07       	cpc	r31, r24
+ 1a0:	d9 f7       	brne	.-10     	; 0x198 <SPI_Data_Flush+0x4>
+    SPI.TxBuf[i]=0;
+  }
+  SPI.TxIndex=0;
+ 1a2:	12 a2       	std	Z+34, r1	; 0x22
+ 1a4:	11 a2       	std	Z+33, r1	; 0x21
+}
+
+
+void SPI_Data_Flush(void){
+  SPI_Flush_Tx_Buf();
+  SPI_Flush_Rx_Buf();
+ 1a6:	0e 94 6d 00 	call	0xda	; 0xda <SPI_Flush_Rx_Buf>
+}
+ 1aa:	08 95       	ret
+
+000001ac <SPI_Data_Add>:
+
+void SPI_Data_Add(uint8_t data){
+  SPI.TxBuf[SPI.TxIndex] = data;
+ 1ac:	20 91 41 01 	lds	r18, 0x0141
+ 1b0:	30 91 42 01 	lds	r19, 0x0142
+ 1b4:	f9 01       	movw	r30, r18
+ 1b6:	e0 50       	subi	r30, 0x00	; 0
+ 1b8:	ff 4f       	sbci	r31, 0xFF	; 255
+ 1ba:	80 83       	st	Z, r24
+  SPI.TxIndex++;
+ 1bc:	2f 5f       	subi	r18, 0xFF	; 255
+ 1be:	3f 4f       	sbci	r19, 0xFF	; 255
+ 1c0:	30 93 42 01 	sts	0x0142, r19
+ 1c4:	20 93 41 01 	sts	0x0141, r18
+  if(SPI.TxIndex>=SPI_BUF_SIZE){
+ 1c8:	20 32       	cpi	r18, 0x20	; 32
+ 1ca:	31 05       	cpc	r19, r1
+ 1cc:	20 f0       	brcs	.+8      	; 0x1d6 <SPI_Data_Add+0x2a>
+    SPI.TxIndex=0;
+ 1ce:	10 92 42 01 	sts	0x0142, r1
+ 1d2:	10 92 41 01 	sts	0x0141, r1
+ 1d6:	08 95       	ret
+
+000001d8 <SPI_Data_Fill>:
+  }
+}
+
+void SPI_Data_Fill(uint8_t *data, uint16_t len){
+ 1d8:	cf 93       	push	r28
+ 1da:	df 93       	push	r29
+ 1dc:	ec 01       	movw	r28, r24
+ 1de:	40 e0       	ldi	r20, 0x00	; 0
+ 1e0:	50 e0       	ldi	r21, 0x00	; 0
+ 1e2:	19 c0       	rjmp	.+50     	; 0x216 <SPI_Data_Fill+0x3e>
+  SPI_Flush_Tx_Buf();
+  SPI_Flush_Rx_Buf();
+}
+
+void SPI_Data_Add(uint8_t data){
+  SPI.TxBuf[SPI.TxIndex] = data;
+ 1e4:	80 91 41 01 	lds	r24, 0x0141
+ 1e8:	90 91 42 01 	lds	r25, 0x0142
+ 1ec:	dc 01       	movw	r26, r24
+ 1ee:	a0 50       	subi	r26, 0x00	; 0
+ 1f0:	bf 4f       	sbci	r27, 0xFF	; 255
+ 1f2:	fe 01       	movw	r30, r28
+ 1f4:	e4 0f       	add	r30, r20
+ 1f6:	f5 1f       	adc	r31, r21
+ 1f8:	20 81       	ld	r18, Z
+ 1fa:	2c 93       	st	X, r18
+  SPI.TxIndex++;
+ 1fc:	01 96       	adiw	r24, 0x01	; 1
+ 1fe:	90 93 42 01 	sts	0x0142, r25
+ 202:	80 93 41 01 	sts	0x0141, r24
+  if(SPI.TxIndex>=SPI_BUF_SIZE){
+ 206:	80 97       	sbiw	r24, 0x20	; 32
+ 208:	20 f0       	brcs	.+8      	; 0x212 <SPI_Data_Fill+0x3a>
+    SPI.TxIndex=0;
+ 20a:	10 92 42 01 	sts	0x0142, r1
+ 20e:	10 92 41 01 	sts	0x0141, r1
+  }
+}
+
+void SPI_Data_Fill(uint8_t *data, uint16_t len){
+  for(uint16_t i=0;i<len;i++){
+ 212:	4f 5f       	subi	r20, 0xFF	; 255
+ 214:	5f 4f       	sbci	r21, 0xFF	; 255
+ 216:	46 17       	cp	r20, r22
+ 218:	57 07       	cpc	r21, r23
+ 21a:	20 f3       	brcs	.-56     	; 0x1e4 <SPI_Data_Fill+0xc>
+    SPI_Data_Add(data[i]);
+  }
+}
+ 21c:	df 91       	pop	r29
+ 21e:	cf 91       	pop	r28
+ 220:	08 95       	ret
+
+00000222 <SPI_Data_Transceive>:
+
+void SPI_Data_Transceive(void){
+ 222:	0f 93       	push	r16
+ 224:	1f 93       	push	r17
+ 226:	cf 93       	push	r28
+ 228:	df 93       	push	r29
+
+void SPI_Set_CSN(uint8_t state){
+  if(state==1){
+    SPI_CSN_PORT  |= (1<<SPI_CSN_bp);
+  }else{
+    SPI_CSN_PORT  &=~(1<<SPI_CSN_bp);
+ 22a:	5f 98       	cbi	0x0b, 7	; 11
+ 22c:	c0 e0       	ldi	r28, 0x00	; 0
+ 22e:	d0 e0       	ldi	r29, 0x00	; 0
+ 230:	24 c0       	rjmp	.+72     	; 0x27a <SPI_Data_Transceive+0x58>
+}
+
+void SPI_Data_Transceive(void){
+  SPI_Set_CSN(0);
+  for(uint16_t i=0;i<SPI.TxIndex;i++){
+    SPI.RxBuf[SPI.RxIndex] = SPI_Transceive(SPI.TxBuf[i]);
+ 232:	00 91 43 01 	lds	r16, 0x0143
+ 236:	10 91 44 01 	lds	r17, 0x0144
+ 23a:	fe 01       	movw	r30, r28
+ 23c:	e0 50       	subi	r30, 0x00	; 0
+ 23e:	ff 4f       	sbci	r31, 0xFF	; 255
+ 240:	80 81       	ld	r24, Z
+ 242:	0e 94 ac 00 	call	0x158	; 0x158 <SPI_Transceive>
+ 246:	00 50       	subi	r16, 0x00	; 0
+ 248:	1f 4f       	sbci	r17, 0xFF	; 255
+ 24a:	f8 01       	movw	r30, r16
+ 24c:	80 a3       	std	Z+32, r24	; 0x20
+	SPI.RxLast = SPI.RxBuf[SPI.RxIndex];
+ 24e:	80 91 43 01 	lds	r24, 0x0143
+ 252:	90 91 44 01 	lds	r25, 0x0144
+ 256:	fc 01       	movw	r30, r24
+ 258:	e0 50       	subi	r30, 0x00	; 0
+ 25a:	ff 4f       	sbci	r31, 0xFF	; 255
+ 25c:	20 a1       	ldd	r18, Z+32	; 0x20
+ 25e:	20 93 40 01 	sts	0x0140, r18
+	SPI.RxIndex++;
+ 262:	01 96       	adiw	r24, 0x01	; 1
+ 264:	90 93 44 01 	sts	0x0144, r25
+ 268:	80 93 43 01 	sts	0x0143, r24
+	if(SPI.RxIndex>=SPI_BUF_SIZE){
+ 26c:	80 97       	sbiw	r24, 0x20	; 32
+ 26e:	20 f0       	brcs	.+8      	; 0x278 <SPI_Data_Transceive+0x56>
+	  SPI.RxIndex=0;
+ 270:	10 92 44 01 	sts	0x0144, r1
+ 274:	10 92 43 01 	sts	0x0143, r1
+  }
+}
+
+void SPI_Data_Transceive(void){
+  SPI_Set_CSN(0);
+  for(uint16_t i=0;i<SPI.TxIndex;i++){
+ 278:	21 96       	adiw	r28, 0x01	; 1
+ 27a:	80 91 41 01 	lds	r24, 0x0141
+ 27e:	90 91 42 01 	lds	r25, 0x0142
+ 282:	c8 17       	cp	r28, r24
+ 284:	d9 07       	cpc	r29, r25
+ 286:	a8 f2       	brcs	.-86     	; 0x232 <SPI_Data_Transceive+0x10>
+  }
+}
+
+void SPI_Set_CSN(uint8_t state){
+  if(state==1){
+    SPI_CSN_PORT  |= (1<<SPI_CSN_bp);
+ 288:	5f 9a       	sbi	0x0b, 7	; 11
+	if(SPI.RxIndex>=SPI_BUF_SIZE){
+	  SPI.RxIndex=0;
+	}
+  }
+  SPI_Set_CSN(1);
+}
+ 28a:	df 91       	pop	r29
+ 28c:	cf 91       	pop	r28
+ 28e:	1f 91       	pop	r17
+ 290:	0f 91       	pop	r16
+ 292:	08 95       	ret
+
+00000294 <SPI_Get_Tx_Buf>:
+
+
+
+uint8_t SPI_Get_Tx_Buf(uint16_t index){
+ 294:	fc 01       	movw	r30, r24
+ 296:	e0 50       	subi	r30, 0x00	; 0
+ 298:	ff 4f       	sbci	r31, 0xFF	; 255
+  return SPI.TxBuf[index];
+}
+ 29a:	80 81       	ld	r24, Z
+ 29c:	08 95       	ret
+
+0000029e <SPI_Get_Rx_Buf>:
+
+uint8_t SPI_Get_Rx_Buf(uint16_t index){
+ 29e:	fc 01       	movw	r30, r24
+ 2a0:	e0 50       	subi	r30, 0x00	; 0
+ 2a2:	ff 4f       	sbci	r31, 0xFF	; 255
+  return SPI.RxBuf[index];
+}
+ 2a4:	80 a1       	ldd	r24, Z+32	; 0x20
+ 2a6:	08 95       	ret
+
+000002a8 <SPI_Get_Tx_Buf_Index>:
+
+uint16_t SPI_Get_Tx_Buf_Index(void){
+  return SPI.TxIndex;
+}
+ 2a8:	80 91 41 01 	lds	r24, 0x0141
+ 2ac:	90 91 42 01 	lds	r25, 0x0142
+ 2b0:	08 95       	ret
+
+000002b2 <SPI_Get_Rx_Buf_Index>:
+
+uint16_t SPI_Get_Rx_Buf_Index(void){
+  return SPI.RxIndex;
+}
+ 2b2:	80 91 43 01 	lds	r24, 0x0143
+ 2b6:	90 91 44 01 	lds	r25, 0x0144
+ 2ba:	08 95       	ret
+
+000002bc <SPI_Get_Rx_Data>:
+
+uint8_t SPI_Get_Rx_Data(void){
+  uint8_t temp = SPI.RxBuf[SPI.RxIndex];
+ 2bc:	20 91 43 01 	lds	r18, 0x0143
+ 2c0:	30 91 44 01 	lds	r19, 0x0144
+ 2c4:	f9 01       	movw	r30, r18
+ 2c6:	e0 50       	subi	r30, 0x00	; 0
+ 2c8:	ff 4f       	sbci	r31, 0xFF	; 255
+ 2ca:	80 a1       	ldd	r24, Z+32	; 0x20
+  SPI.RxIndex++;
+ 2cc:	2f 5f       	subi	r18, 0xFF	; 255
+ 2ce:	3f 4f       	sbci	r19, 0xFF	; 255
+ 2d0:	30 93 44 01 	sts	0x0144, r19
+ 2d4:	20 93 43 01 	sts	0x0143, r18
+  return temp;
+}
+ 2d8:	08 95       	ret
+
+000002da <SPI_Get_Rx_Last>:
+
+uint8_t SPI_Get_Rx_Last(void){
+  return SPI.RxLast;
+}
+ 2da:	80 91 40 01 	lds	r24, 0x0140
+ 2de:	08 95       	ret
+
+000002e0 <SPI_Init>:
+
+
+void SPI_Init(void){
+  SPI_GPIO_Init();
+ 2e0:	0e 94 84 00 	call	0x108	; 0x108 <SPI_GPIO_Init>
+  
+ 2e4:	08 95       	ret
+
+000002e6 <_exit>:
+ 2e6:	f8 94       	cli
+
+000002e8 <__stop_program>:
+ 2e8:	ff cf       	rjmp	.-2      	; 0x2e8 <__stop_program>
